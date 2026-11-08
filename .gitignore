@@ -1,0 +1,25 @@
+# Gradle / Android
+.gradle/
+**/build/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local signing files
+*.jks
+*.keystore
+keystore.properties
+
+# OS/editor
+.DS_Store
+Thumbs.db
