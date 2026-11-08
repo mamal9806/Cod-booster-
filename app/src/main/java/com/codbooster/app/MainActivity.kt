@@ -11,6 +11,16 @@ import android.os.Bundle
 import android.os.PowerManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -25,6 +35,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -33,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
 import java.net.URL
@@ -132,7 +144,7 @@ private fun BoosterScreen(context: Context) {
     val bg = Color(0xFF080B14)
     val panel = Color(0xFF151B2B)
     val cyan = Color(0xFF79E7FF)
-    val muted = Color(0xFFAAB5C9)
+    val muted = Color.White
 
     MaterialTheme(colorScheme = darkColorScheme(
         background = bg, surface = panel, primary = cyan,
@@ -146,14 +158,14 @@ private fun BoosterScreen(context: Context) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.size(46.dp).clip(RoundedCornerShape(16.dp))
-                    .background(Brush.linearGradient(listOf(cyan, Color(0xFF6677FF)))),
+                    .background(Brush.linearGradient(listOf(cyan, Color(0xFF6677FF)))).alpha(pulse),
                     contentAlignment = Alignment.Center) {
                     Icon(Icons.Default.Bolt, null, tint = Color(0xFF07101D), modifier = Modifier.size(28.dp))
                 }
                 Spacer(Modifier.width(12.dp))
                 Column(Modifier.weight(1f)) {
                     Text("COD BOOSTER", fontSize = 21.sp, fontWeight = FontWeight.Black, color = Color.White)
-                    Text("SMART GAMING ASSISTANT", fontSize = 10.sp, color = muted, letterSpacing = 2.sp)
+                    Text("SMART GAMING ASSISTANT", fontSize = 10.sp, color = Color.White, letterSpacing = 2.sp)
                 }
                 Surface(shape = CircleShape, color = Color(0xFF173D3B)) {
                     Text("NO ROOT", Modifier.padding(horizontal = 11.dp, vertical = 7.dp),
@@ -241,7 +253,7 @@ private fun BoosterScreen(context: Context) {
                 Tip("شبکه", "در محل دارای آنتن‌دهی بهتر بازی کن؛ VPN و دانلودهای پس‌زمینه می‌توانند تأخیر را بیشتر کنند.")
             }
 
-            Text("نسخه آزمایشی 0.1.0 • ابزار کمکی بدون روت", color = muted, fontSize = 10.sp,
+            Text("نسخه 0.2.0 • ابزار کمکی بدون روت", color = muted, fontSize = 10.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally))
         }
     }
@@ -266,7 +278,7 @@ private fun GlassCard(color: Color, content: @Composable ColumnScope.() -> Unit)
         modifier = Modifier.fillMaxWidth().border(1.dp, Color.White.copy(alpha = 0.10f), RoundedCornerShape(26.dp)),
         tonalElevation = 4.dp
     ) {
-        Column(Modifier.padding(17.dp), verticalArrangement = Arrangement.spacedBy(7.dp), content = content)
+        Column(Modifier.padding(17.dp).animateContentSize(), verticalArrangement = Arrangement.spacedBy(7.dp), content = content)
     }
 }
 
@@ -277,7 +289,7 @@ private fun Metric(label: String, value: String, icon: ImageVector, tint: Color,
             Icon(icon, null, tint = tint, modifier = Modifier.size(19.dp))
             Spacer(Modifier.height(5.dp))
             Text(value, fontSize = 15.sp, fontWeight = FontWeight.Bold)
-            Text(label, fontSize = 10.sp, color = Color(0xFFAAB5C9))
+            Text(label, fontSize = 10.sp, color = Color.White)
         }
     }
 }
