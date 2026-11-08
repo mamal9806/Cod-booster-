@@ -145,6 +145,12 @@ private fun BoosterScreen(context: Context) {
     val panel = Color(0xFF151B2B)
     val cyan = Color(0xFF79E7FF)
     val muted = Color.White
+    val pulse = rememberInfiniteTransition(label = "pulse").animateFloat(
+        initialValue = 0.78f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(1400), RepeatMode.Reverse),
+        label = "pulse"
+    ).value
 
     MaterialTheme(colorScheme = darkColorScheme(
         background = bg, surface = panel, primary = cyan,
