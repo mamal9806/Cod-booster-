@@ -28,6 +28,10 @@ python -m unittest discover -s ai_engine_tests -v
 
 جزئیات ارتباط Kotlin و Python در فایل `PYTHON_ANDROID_BRIDGE.md` مستند شده است.
 
+### PersianGPT (experimental)
+
+یک پروژه آزمایشی مستقل برای ساخت مدل زبانی فارسی از وزن‌های تصادفی، با معماری Decoder-only Transformer و PyTorch. کد در پوشه `persiangpt/` قرار دارد. به دلیل محدودیت پلن رایگان KataBump (حدود 308 مگابایت RAM)، آموزش و اجرای خود مدل روی آن توصیه نمی‌شود؛ `main.py` فعلاً فقط سرویس سبک بررسی سلامت است. راهنمای کامل در [`persiangpt/README.md`](persiangpt/README.md) آمده است.
+
 ## English
 
 **COD BOOSTER** is an Android project with a Liquid Glass-inspired interface and a local Python analysis engine. Its goal is to inspect available device signals and provide cautious recommendations that may help Call of Duty: Mobile run more smoothly.
