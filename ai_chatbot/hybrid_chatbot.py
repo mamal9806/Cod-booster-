@@ -25,8 +25,10 @@ class ConversationStore:
         self.max_messages = max(4, int(max_messages))
 
     def _path(self, conversation_id: str) -> Path:
-        safe = "".join(c for c in str(conversation_id) if c.isalnum() or c in "-_")
-        if not safe: raise ValueError("conversation_id must contain letters or digits")
+        original = str(conversation_id)
+        safe = "".join(c for c in original if c.isalnum() or c in "-_")
+        if not safe or safe != original:
+            raise ValueError("conversation_id may contain only letters, digits, hyphens and underscores")
         return self.directory / f"{safe}.json"
 
     def load(self, conversation_id: str) -> List[Dict[str, str]]:
