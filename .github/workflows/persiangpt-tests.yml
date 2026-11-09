@@ -1,0 +1,25 @@
+name: PersianGPT checks
+on:
+  push:
+    paths:
+      - "persiangpt/**"
+      - "main.py"
+      - ".github/workflows/persiangpt-tests.yml"
+  pull_request:
+    paths:
+      - "persiangpt/**"
+      - "main.py"
+      - ".github/workflows/persiangpt-tests.yml"
+jobs:
+  lightweight-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile Python files
+        run: python -m compileall -q persiangpt main.py
+      - name: Test configuration
+        working-directory: persiangpt
+        run: PYTHONPATH=. python -m unittest discover -s tests -v
