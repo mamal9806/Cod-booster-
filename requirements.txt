@@ -1,0 +1,3 @@
+# Intentionally empty for the lightweight KataBump Free health service.
+# Install PyTorch only in a separate training environment:
+# python -m pip install torch
